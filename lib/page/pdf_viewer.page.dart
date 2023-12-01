@@ -1,14 +1,17 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 import '../widgets/pages.widget.dart';
 
 class PDFViewer extends StatefulWidget {
-  final File file;
+  final Uint8List fileBytes;
+  final String name;
 
-  const PDFViewer({super.key, required this.file});
+  const PDFViewer({
+    super.key,
+    required this.fileBytes,
+    required this.name,
+  });
 
   @override
   State<PDFViewer> createState() => _PDFViewerState();
@@ -17,16 +20,14 @@ class PDFViewer extends StatefulWidget {
 class _PDFViewerState extends State<PDFViewer> {
   @override
   Widget build(BuildContext context) {
-    final name = basename(widget.file.path).replaceFirst('.pdf', '');
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        title: Text(widget.name),
         centerTitle: true,
       ),
       body: Center(
         child: PagesWidget(
-          file: widget.file,
+          fileBytes: widget.fileBytes,
         ),
       ),
     );

@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../api/pdf_api.dart';
@@ -10,11 +9,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void navigateToNextPage(File file) {
+    void navigateToNextPage(Uint8List fileBytes, String name) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) => PDFViewer(
-            file: file,
+            fileBytes: fileBytes,
+            name: name,
           ),
         ),
       );
@@ -30,10 +30,10 @@ class HomePage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  final file = await PDFApi.pickFile();
-                  if (file == null) return;
+                  final (fileBytes, name) = await PDFApi.pickFile();
+                  if (fileBytes == null || name == null) return;
 
-                  navigateToNextPage(file);
+                  navigateToNextPage(fileBytes, name);
                 },
                 child: const Text('File PDF'),
               ),

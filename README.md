@@ -1,6 +1,6 @@
 # pdf_viewer
 
-Sample project of a pdf viewer app that is multiplatform. This project works on Linux and Android.
+Sample project of a pdf viewer app that is multiplatform. This project works on Android, IOS, Web, Mac, Windows and Linux.
 
 <p float="left">
   <img src="./readme/image-big-1.png" width="300" />
